@@ -231,51 +231,47 @@ class Backend extends CI_Controller
     redirect('Backend/data_bidang_spesialis');
   }
 
-  public function data_spesialis_edit($id_ruangan)
+  public function data_spesialis_edit($id_spesialis)
   {
     $where = array(
-      'id_ruangan' => $id_ruangan
+      'id_spesialis' => $id_spesialis
     );
 
-    $this->load->model('M_Ruangan');
-    $data['tbl_ruangan'] = $this->M_Ruangan->view_data($where, 'tbl_ruangan')->result();
+    $this->load->model('M_Spesialis');
+    $data['tbl_bidang_spesialis'] = $this->M_Spesialis->view_data($where, 'tbl_bidang_spesialis')->result();
     $this->load->view('backend/template/header.php');
-    $this->load->view('backend/data_ruangan_edit.php', $data);
+    $this->load->view('backend/data_bidang_spesialis_edit.php', $data);
     $this->load->view('backend/template/footer.php');
   }
 
   public function data_spesialis_edit_action()
   {
-    $id = $this->input->POST('idruangan');
-    $nomor = $this->input->POST('nomor');
+    $id = $this->input->POST('id');
+    $kode = $this->input->POST('kode');
     $nama = $this->input->POST('nama');
-    $spesialis = $this->input->POST('spesialis');
-    $biaya = $this->input->POST('biaya');
 
     $data = array(
-      'nomor_ruangan' => $nomor,
-      'nama_ruangan' => $nama,
-      'id_spesialis' => $spesialis,
-      'biaya' => $biaya
+      'kode_spesialis' => $kode,
+      'nama_spesialis' => $nama
     );
 
     $where = array(
-      'id_ruangan' => $id
+      'id_spesialis' => $id
     );
 
-    $this->load->model('M_Ruangan');
-    $this->M_Ruangan->update_data($where, $data, 'tbl_ruangan');
-    redirect('Backend/data_ruangan');
+    $this->load->model('M_Spesialis');
+    $this->M_Spesialis->update_data($where, $data, 'tbl_bidang_spesialis');
+    redirect('Backend/data_bidang_spesialis');
   }
 
-  function data_spesialis_delete($id_ruangan)
+  function data_spesialis_delete($id_spesialis)
   {
     $where = array(
-      'id_ruangan' => $id_ruangan
+      'id_spesialis' => $id_spesialis
     );
 
-    $this->load->model('M_Ruangan');
-    $this->M_Ruangan->delete_data($where, 'tbl_ruangan');
-    redirect('Backend/data_ruangan');
+    $this->load->model('M_Spesialis');
+    $this->M_Spesialis->delete_data($where, 'tbl_bidang_spesialis');
+    redirect('Backend/data_bidang_spesialis');
   }
 }
