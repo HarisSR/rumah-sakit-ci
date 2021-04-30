@@ -63,7 +63,7 @@
                   <td><?php echo $ruangan->biaya ?></td>
                   <td>
                     <a href="<?php echo base_url() . 'index.php/Backend/data_ruangan_edit/' . $ruangan->id_ruangan ?>" class="btn btn-success">Edit</a>
-                    <a href="<?php echo base_url() . 'index.php/Backend/data_ruangan_delete/' . $ruangan->id_ruangan ?>" class="btn btn-danger">Delete</a>
+                    <a href="<?php echo base_url() . 'index.php/Backend/data_ruangan_delete/' . $ruangan->id_ruangan ?>" onclick="return confirm('Apakah anda yakin ingin  menghapus data ini ?')" class="btn btn-danger">Delete</a>
                   </td>
                 </tr>
               <?php } ?>

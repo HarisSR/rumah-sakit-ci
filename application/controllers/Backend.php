@@ -149,57 +149,51 @@ class Backend extends CI_Controller
     redirect('Backend/data_ruangan');
   }
 
-  public function data_ruangan_edit($id_pasien)
+  public function data_ruangan_edit($id_ruangan)
   {
     $where = array(
-      'id_ruangan' => $id_pasien
+      'id_ruangan' => $id_ruangan
     );
 
     $this->load->model('M_Ruangan');
     $data['tbl_ruangan'] = $this->M_Ruangan->view_data($where, 'tbl_ruangan')->result();
     $this->load->view('backend/template/header.php');
-    $this->load->view('backend/data_pasien_edit.php', $data);
+    $this->load->view('backend/data_ruangan_edit.php', $data);
     $this->load->view('backend/template/footer.php');
   }
 
   public function data_ruangan_edit_action()
   {
-    $id = $this->input->POST('idpasien');
-    $nik = $this->input->POST('nik');
+    $id = $this->input->POST('idruangan');
+    $nomor = $this->input->POST('nomor');
     $nama = $this->input->POST('nama');
-    $jk = $this->input->POST('jk');
-    $umur = $this->input->POST('umur');
-    $alamat = $this->input->POST('alamat');
-    $keluhan = $this->input->POST('keluhan');
-    $pelayanan = $this->input->POST('pelayanan');
+    $spesialis = $this->input->POST('spesialis');
+    $biaya = $this->input->POST('biaya');
 
     $data = array(
-      'nik' => $nik,
-      'nama_pasien' => $nama,
-      'jk' => $jk,
-      'umur' => $umur,
-      'alamat' => $alamat,
-      'keluhan' => $keluhan,
-      'id_spesialis' => $pelayanan
+      'nomor_ruangan' => $nomor,
+      'nama_ruangan' => $nama,
+      'id_spesialis' => $spesialis,
+      'biaya' => $biaya
     );
 
     $where = array(
-      'id_pasien' => $id
+      'id_ruangan' => $id
     );
 
-    $this->load->model('M_Pasien');
-    $this->M_Pasien->update_data($where, $data, 'tbl_pasien');
-    redirect('Backend');
+    $this->load->model('M_Ruangan');
+    $this->M_Ruangan->update_data($where, $data, 'tbl_ruangan');
+    redirect('Backend/data_ruangan');
   }
 
-  function data_ruangan_delete($id_pasien)
+  function data_ruangan_delete($id_ruangan)
   {
     $where = array(
-      'id_pasien' => $id_pasien
+      'id_ruangan' => $id_ruangan
     );
 
-    $this->load->model('M_Pasien');
-    $this->M_Pasien->delete_data($where, 'tbl_pasien');
-    redirect('Backend');
+    $this->load->model('M_Ruangan');
+    $this->M_Ruangan->delete_data($where, 'tbl_ruangan');
+    redirect('Backend/data_ruangan');
   }
 }
