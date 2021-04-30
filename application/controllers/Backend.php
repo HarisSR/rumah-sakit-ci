@@ -274,4 +274,148 @@ class Backend extends CI_Controller
     $this->M_Spesialis->delete_data($where, 'tbl_bidang_spesialis');
     redirect('Backend/data_bidang_spesialis');
   }
+
+  // Controller Dokter
+
+  public function data_dokter()
+  {
+    $this->load->model('M_Dokter');
+    $data['tbl_dokter'] = $this->M_Dokter->tampil_data()->result();
+    $this->load->view('backend/template/header.php');
+    $this->load->view('backend/data_dokter.php', $data);
+    $this->load->view('backend/template/footer.php');
+  }
+
+  public function data_dokter_add()
+  {
+    $this->load->view('backend/template/header.php');
+    $this->load->view('backend/data_dokter_add.php');
+    $this->load->view('backend/template/footer.php');
+  }
+
+  public function data_dokter_add_action()
+  {
+
+    $config['upload_path'] = "./uploads/";
+    $config['allowed_types'] = "jpg|png|gif";
+    $config['max_size'] = 2048;
+    $config['encrypt_name'] = TRUE;
+    $this->load->library('upload', $config);
+
+    if (!$this->upload->do_upload('photo')) {
+      $error = array('error' => $this->upload->display_error());
+      redirect('Backend/data_dokter_add', $error);
+    } else {
+      $nip = $this->input->POST('nip');
+      $kode = $this->input->POST('kode');
+      $nama = $this->input->POST('nama');
+      $alamat = $this->input->POST('alamat');
+      $spesialis = $this->input->POST('spesialis');
+      $photo = $this->upload->data('file_name');
+
+      $data = array(
+        'nip' => $nip,
+        'kode_dokter' => $kode,
+        'nama_dokter' => $nama,
+        'alamat' => $alamat,
+        'id_spesialis' => $spesialis,
+        'photo' => $photo
+      );
+
+      $this->load->model('M_Dokter');
+      $this->M_Dokter->input_data($data, 'tbl_dokter');
+      redirect('Backend/data_dokter');
+    }
+  }
+
+  public function data_dokter_edit($id_dokter)
+  {
+    $where = array(
+      'id_dokter' => $id_dokter
+    );
+
+    $this->load->model('M_Dokter');
+    $data['tbl_dokter'] = $this->M_Dokter->view_data($where, 'tbl_dokter')->result();
+    $this->load->view('backend/template/header.php');
+    $this->load->view('backend/data_dokter_edit.php', $data);
+    $this->load->view('backend/template/footer.php');
+  }
+
+  public function data_dokter_edit_action()
+  {
+    if (empty($_FILES['photo']['name'])) {
+      $id = $this->input->POST('id');
+      $nip = $this->input->POST('nip');
+      $kode = $this->input->POST('kode');
+      $nama = $this->input->POST('nama');
+      $alamat = $this->input->POST('alamat');
+      $spesialis = $this->input->POST('spesialis');
+
+      $data = array(
+        'nip' => $nip,
+        'kode_dokter' => $kode,
+        'nama_dokter' => $nama,
+        'alamat' => $alamat,
+        'id_spesialis' => $spesialis
+      );
+
+      $where = array(
+        'id_dokter' => $id
+      );
+
+      $this->load->model('M_Dokter');
+      $this->M_Dokter->update_data($where, $data, 'tbl_dokter');
+      redirect('Backend/data_dokter');
+    } else {
+      $config['upload_path'] = FCPATH . "/uploads/";
+      $config['allowed_types'] = "jpg|png|gif|jpeg";
+      $config['max_size'] = 2048;
+      $config['encrypt_name'] = TRUE;
+      $this->load->library('upload');
+      $this->upload->initialize($config);
+
+      $id = $this->input->POST('id');
+      $nip = $this->input->POST('nip');
+      $kode = $this->input->POST('kode');
+      $nama = $this->input->POST('nama');
+      $alamat = $this->input->POST('alamat');
+      $spesialis = $this->input->POST('spesialis');
+      $this->upload->do_upload('photo');
+      $photo = $this->upload->data('file_name');
+
+      $data = array(
+        'nip' => $nip,
+        'kode_dokter' => $kode,
+        'nama_dokter' => $nama,
+        'alamat' => $alamat,
+        'id_spesialis' => $spesialis,
+        'photo' => $photo
+      );
+
+      $where = array(
+        'id_dokter' => $id
+      );
+
+      $file = $this->db->get_where('tbl_dokter', ['id_dokter' => $id])->row();
+      unlink("./uploads/" . $file->photo);
+
+      $this->load->model('M_Dokter');
+      $this->M_Dokter->update_data($where, $data, 'tbl_dokter');
+      redirect('Backend/data_dokter');
+    }
+  }
+
+  function data_dokter_delete($id_dokter)
+  {
+    $where = array(
+      'id_dokter' => $id_dokter
+    );
+
+    $file = $this->db->get_where('tbl_dokter', ['id_dokter' => $id_dokter])->row();
+    unlink("./uploads/" . $file->photo);
+
+    $this->load->model('M_Dokter');
+    $this->M_Dokter->delete_data($where, 'tbl_dokter');
+    redirect('Backend/data_dokter');
+  }
 }
