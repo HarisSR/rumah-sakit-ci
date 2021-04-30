@@ -5,12 +5,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">Data Pasien</h1>
+          <h1 class="m-0">Data Ruangan</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Pasien</li>
+            <li class="breadcrumb-item">Home</li>
+            <li class="breadcrumb-item active">ruangan</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -23,7 +23,7 @@
     <div class="container-fluid">
       <div class="card">
         <div class="card-header float-left">
-          <h2 class="card-title"><b>List Pasien</b></h2>
+          <h2 class="card-title"><b>List Ruangan</b></h2>
           <div class="float-right">
             <a href="<?php echo base_url() . 'index.php/Backend/data_ruangan_add' ?>" class="btn btn-primary">tambah</a>
           </div>
@@ -59,7 +59,7 @@
                   <td><?php echo $no++ ?></td>
                   <td><?php echo $ruangan->nama_ruangan ?></td>
                   <td><?php echo $ruangan->nomor_ruangan ?></td>
-                  <td><?php echo $ruangan->id_spesialis ?></td>
+                  <td><?php echo $ruangan->nama_spesialis ?></td>
                   <td><?php echo $ruangan->biaya ?></td>
                   <td>
                     <a href="<?php echo base_url() . 'index.php/Backend/data_ruangan_edit/' . $ruangan->id_ruangan ?>" class="btn btn-success">Edit</a>

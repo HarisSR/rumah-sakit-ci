@@ -45,9 +45,13 @@
               <div class="form-group">
                 <label>Spesialis</label>
                 <select name="spesialis" class="form-control">
-                  <option value="<?php echo $dokter->id_spesialis ?>"><?php echo $dokter->id_spesialis ?></option>
-                  <option value="1">Kulit</option>
-                  <option value="2">Pernafasan</option>
+                  <?php foreach ($tbl_spesialis as $spesialis) {
+                    if ($spesialis->kode_spesialis == $dokter->kode_spesialis) { ?>
+                      <option value="<?php echo $spesialis->kode_spesialis ?>" selected><?php echo $spesialis->nama_spesialis ?></option>
+                    <?php } else { ?>
+                      <option value="<?php echo $spesialis->kode_spesialis ?>"><?php echo $spesialis->nama_spesialis ?></option>
+                    <?php } ?>
+                  <?php } ?>
                 </select>
               </div>
               <div class="form-group">

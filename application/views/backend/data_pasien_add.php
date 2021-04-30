@@ -59,8 +59,9 @@
             <div class="form-group">
               <label>Pelayanan</label>
               <select name="pelayanan" class="form-control">
-                <option value="1">Kulit</option>
-                <option value="2">Pernafasan</option>
+                <?php foreach ($tbl_spesialis as $spesialis) { ?>
+                  <option value="<?php echo $spesialis->kode_spesialis ?>"><?php echo $spesialis->nama_spesialis ?></option>
+                <?php } ?>
               </select>
             </div>
             <button type="submit" class="btn btn-primary float-right" name="submit">tambah</button>

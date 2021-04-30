@@ -5,7 +5,11 @@ class M_Pasien extends CI_Model
 
   function tampil_data()
   {
-    return $this->db->get('tbl_pasien');
+    $this->db->select('*');
+    $this->db->from('tbl_pasien');
+    $this->db->join('tbl_bidang_spesialis', 'tbl_pasien.kode_spesialis = tbl_bidang_spesialis.kode_spesialis');
+
+    return $this->db->get();
   }
 
   function input_data($data, $table)
@@ -15,7 +19,12 @@ class M_Pasien extends CI_Model
 
   function view_data($where, $table)
   {
-    return $this->db->get_where($table, $where);
+    $this->db->select('*');
+    $this->db->from($table);
+    $this->db->join('tbl_bidang_spesialis', 'tbl_pasien.kode_spesialis = tbl_bidang_spesialis.kode_spesialis');
+    $this->db->where($where);
+
+    return $this->db->get();
   }
 
   function update_data($where, $data, $table)

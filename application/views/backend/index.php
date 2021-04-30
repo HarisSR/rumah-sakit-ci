@@ -9,7 +9,7 @@
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item">Home</li>
             <li class="breadcrumb-item active">Pasien</li>
           </ol>
         </div><!-- /.col -->
@@ -64,7 +64,7 @@
                   <td><?php echo $pasien->jk ?></td>
                   <td><?php echo $pasien->umur ?></td>
                   <td><?php echo $pasien->keluhan ?></td>
-                  <td><?php echo $pasien->id_spesialis ?></td>
+                  <td><?php echo $pasien->nama_spesialis ?></td>
                   <td>
                     <a href="<?php echo base_url() . 'index.php/Backend/data_pasien_edit/' . $pasien->id_pasien ?>" class="btn btn-success">Edit</a>
                     <a href="<?php echo base_url() . 'index.php/Backend/data_pasien_delete/' . $pasien->id_pasien ?>" class="btn btn-danger">Delete</a>

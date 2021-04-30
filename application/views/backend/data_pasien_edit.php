@@ -62,9 +62,13 @@
               <div class="form-group">
                 <label>Pelayanan</label>
                 <select name="pelayanan" class="form-control">
-                  <option value="<?php echo $pasien->id_spesialis ?>"><?php echo $pasien->id_spesialis ?></option>
-                  <option value="1">Kulit</option>
-                  <option value="2">Pernafasan</option>
+                  <?php foreach ($tbl_spesialis as $spesialis) {
+                    if ($spesialis->kode_spesialis == $pasien->kode_spesialis) { ?>
+                      <option value="<?php echo $spesialis->kode_spesialis ?>" selected><?php echo $spesialis->nama_spesialis ?></option>
+                    <?php } else { ?>
+                      <option value="<?php echo $spesialis->kode_spesialis ?>"><?php echo $spesialis->nama_spesialis ?></option>
+                    <?php } ?>
+                  <?php } ?>
                 </select>
               </div>
               <button type="submit" class="btn btn-primary float-right" name="submit">tambah</button>

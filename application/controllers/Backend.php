@@ -26,8 +26,10 @@ class Backend extends CI_Controller
 
   public function data_pasien_add()
   {
+    $this->load->model('M_Spesialis');
+    $data['tbl_spesialis'] = $this->M_Spesialis->tampil_data()->result();
     $this->load->view('backend/template/header.php');
-    $this->load->view('backend/data_pasien_add.php');
+    $this->load->view('backend/data_pasien_add.php', $data);
     $this->load->view('backend/template/footer.php');
   }
 
@@ -49,7 +51,7 @@ class Backend extends CI_Controller
       'umur' => $umur,
       'alamat' => $alamat,
       'keluhan' => $keluhan,
-      'id_spesialis' => $pelayanan
+      'kode_spesialis' => $pelayanan
     );
 
     $this->load->model('M_Pasien');
@@ -65,6 +67,10 @@ class Backend extends CI_Controller
 
     $this->load->model('M_Pasien');
     $data['tbl_pasien'] = $this->M_Pasien->view_data($where, 'tbl_pasien')->result();
+
+    $this->load->model('M_Spesialis');
+    $data['tbl_spesialis'] = $this->M_Spesialis->tampil_data()->result();
+
     $this->load->view('backend/template/header.php');
     $this->load->view('backend/data_pasien_edit.php', $data);
     $this->load->view('backend/template/footer.php');
@@ -88,7 +94,7 @@ class Backend extends CI_Controller
       'umur' => $umur,
       'alamat' => $alamat,
       'keluhan' => $keluhan,
-      'id_spesialis' => $pelayanan
+      'kode_spesialis' => $pelayanan
     );
 
     $where = array(
@@ -124,8 +130,11 @@ class Backend extends CI_Controller
 
   public function data_ruangan_add()
   {
+    $this->load->model('M_Spesialis');
+    $data['tbl_spesialis'] = $this->M_Spesialis->tampil_data()->result();
+
     $this->load->view('backend/template/header.php');
-    $this->load->view('backend/data_ruangan_add.php');
+    $this->load->view('backend/data_ruangan_add.php', $data);
     $this->load->view('backend/template/footer.php');
   }
 
@@ -140,7 +149,7 @@ class Backend extends CI_Controller
     $data = array(
       'nomor_ruangan' => $nomor,
       'nama_ruangan' => $nama,
-      'id_spesialis' => $spesialis,
+      'kode_spesialis' => $spesialis,
       'biaya' => $biaya
     );
 
@@ -157,6 +166,9 @@ class Backend extends CI_Controller
 
     $this->load->model('M_Ruangan');
     $data['tbl_ruangan'] = $this->M_Ruangan->view_data($where, 'tbl_ruangan')->result();
+
+    $this->load->model('M_Spesialis');
+    $data['tbl_spesialis'] = $this->M_Spesialis->tampil_data()->result();
     $this->load->view('backend/template/header.php');
     $this->load->view('backend/data_ruangan_edit.php', $data);
     $this->load->view('backend/template/footer.php');
@@ -173,7 +185,7 @@ class Backend extends CI_Controller
     $data = array(
       'nomor_ruangan' => $nomor,
       'nama_ruangan' => $nama,
-      'id_spesialis' => $spesialis,
+      'kode_spesialis' => $spesialis,
       'biaya' => $biaya
     );
 
@@ -288,8 +300,11 @@ class Backend extends CI_Controller
 
   public function data_dokter_add()
   {
+    $this->load->model('M_Spesialis');
+    $data['tbl_spesialis'] = $this->M_Spesialis->tampil_data()->result();
+
     $this->load->view('backend/template/header.php');
-    $this->load->view('backend/data_dokter_add.php');
+    $this->load->view('backend/data_dokter_add.php', $data);
     $this->load->view('backend/template/footer.php');
   }
 
@@ -318,7 +333,7 @@ class Backend extends CI_Controller
         'kode_dokter' => $kode,
         'nama_dokter' => $nama,
         'alamat' => $alamat,
-        'id_spesialis' => $spesialis,
+        'kode_spesialis' => $spesialis,
         'photo' => $photo
       );
 
@@ -333,6 +348,9 @@ class Backend extends CI_Controller
     $where = array(
       'id_dokter' => $id_dokter
     );
+
+    $this->load->model('M_Spesialis');
+    $data['tbl_spesialis'] = $this->M_Spesialis->tampil_data()->result();
 
     $this->load->model('M_Dokter');
     $data['tbl_dokter'] = $this->M_Dokter->view_data($where, 'tbl_dokter')->result();
@@ -356,7 +374,7 @@ class Backend extends CI_Controller
         'kode_dokter' => $kode,
         'nama_dokter' => $nama,
         'alamat' => $alamat,
-        'id_spesialis' => $spesialis
+        'kode_spesialis' => $spesialis
       );
 
       $where = array(
@@ -388,7 +406,7 @@ class Backend extends CI_Controller
         'kode_dokter' => $kode,
         'nama_dokter' => $nama,
         'alamat' => $alamat,
-        'id_spesialis' => $spesialis,
+        'kode_spesialis' => $spesialis,
         'photo' => $photo
       );
 
