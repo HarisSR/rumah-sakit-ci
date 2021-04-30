@@ -87,7 +87,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </li>
             <li class="nav-header">Data Rumah Sakit</li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="<?php echo base_url() . 'index.php/Backend/data_dokter' ?>" class="nav-link">
                 <i class="nav-icon fas fa-user-md"></i>
                 <p>
                   Dokter
@@ -95,7 +95,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="<?php echo base_url() . 'index.php/Backend/data_bidang_spesialis' ?>" class="nav-link">
                 <i class="nav-icon fas fa-star-of-life"></i>
                 <p>
                   Bidang Spesialis
